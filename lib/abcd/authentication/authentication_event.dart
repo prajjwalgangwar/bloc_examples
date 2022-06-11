@@ -14,3 +14,5 @@ class AuthenticationSuccessEvent extends AuthenticationEvent {
   final String phoneNumber;
   AuthenticationSuccessEvent( {required this.phoneNumber});
 }
+
+class OTPInitialEvent extends AuthenticationEvent{}

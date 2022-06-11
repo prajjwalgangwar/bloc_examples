@@ -6,6 +6,8 @@ class AuthenticationValidState extends AuthenticationState {
 
 }
 
+class OTPInitialState extends AuthenticationState{}
+
 class AuthenticationErrorState extends AuthenticationState {
   final String errorMessage;
 

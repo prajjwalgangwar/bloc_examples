@@ -1,20 +1,25 @@
 import 'dart:async';
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
+import 'package:bloc_examples/authentication/authentication_bloc.dart';
+import 'package:bloc_examples/authentication/authentication_event.dart';
+import 'package:bloc_examples/authentication/authentication_state.dart';
 import 'package:bloc_examples/screens/Home.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class OTPVerification extends StatefulWidget {
+// class OTPVerification extends StatefulWidget {
+//   final String phoneNumber;
+//
+//   const OTPVerification({Key? key, required this.phoneNumber}) : super(key: key);
+//
+//   @override
+//   OTPVerificationState createState() => OTPVerificationState();
+// }
+
+class OTPVerification extends StatelessWidget {
   final String phoneNumber;
-
-  const OTPVerification({Key? key, required this.phoneNumber}) : super(key: key);
-
-  @override
-  OTPVerificationState createState() => OTPVerificationState();
-}
-
-class OTPVerificationState extends State<OTPVerification> {
   TextEditingController textEditingController = TextEditingController();
 
   // ignore: close_sinks
@@ -25,33 +30,41 @@ class OTPVerificationState extends State<OTPVerification> {
   String currentText = "";
   final formKey = GlobalKey<FormState>();
 
-  @override
-  void initState() {
-    errorController = StreamController<ErrorAnimationType>();
-    super.initState();
-  }
+  OTPVerification({Key? key, required this.phoneNumber}) : super(key: key);
 
-  @override
-  void dispose() {
-    errorController!.close();
-    super.dispose();
-  }
+  // @override
+  // void initState() {
+  //   errorController = StreamController<ErrorAnimationType>();
+  //   super.initState();
+  // }
+  //
+  // @override
+  // void dispose() {
+  //   errorController!.close();
+  //   super.dispose();
+  // }
 
-  // snackBar Widget
-  snackBar(String? message) {
-    return ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message!),
-        duration: const Duration(seconds: 2),
-      ),
-    );
-  }
+  // // snackBar Widget
+  // snackBar(String? message) {
+  //   return ScaffoldMessenger.of(context).showSnackBar(
+  //     SnackBar(
+  //       content: Text(message!),
+  //       duration: const Duration(seconds: 2),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
+      body: BlocProvider(
+  create: (context) => AuthenticationBloc()..add(AuthenticationSuccessEvent(phoneNumber: phoneNumber)),
+  child: BlocListener<AuthenticationBloc, AuthenticationState>(
+  listener: (context, state) {
+    // TODO: implement listener
+  },
+  child: Column(
         children: [
           Expanded(
             child: Container(
@@ -61,7 +74,7 @@ class OTPVerificationState extends State<OTPVerification> {
                   image: DecorationImage(
                       fit: BoxFit.contain,
                       image: CachedNetworkImageProvider("https://i.pinimg.com/originals/9e/6c/de/9e6cde2657da66499330770fbb8d8bfc.gif") //todo
-                      )),
+                  )),
             ),
           ),
           Container(
@@ -80,10 +93,10 @@ class OTPVerificationState extends State<OTPVerification> {
                   ),
                   subtitle: RichText(
                     text: TextSpan(
-                        text: "Enter the code sent to ",
+                        text: "Enter the code sent to $phoneNumber",
                         children: [
                           TextSpan(
-                              text: "${widget.phoneNumber}",
+                              text: "cbnsnclsn",
                               style: const TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w400,
@@ -142,9 +155,7 @@ class OTPVerificationState extends State<OTPVerification> {
                       // },
                       onChanged: (value) {
                         print(value);
-                        setState(() {
-                          currentText = value;
-                        });
+
                       },
                       beforeTextPaste: (text) {
                         print("Allowing to paste $text");
@@ -172,7 +183,7 @@ class OTPVerificationState extends State<OTPVerification> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                     const Text(
+                      const Text(
                         "Didn't receive the code? ",
                         style: TextStyle(color: Colors.black54, fontSize: 12),
                       ),
@@ -226,34 +237,16 @@ class OTPVerificationState extends State<OTPVerification> {
                   ),
                   child: MaterialButton(
                     onPressed: () {
-                      formKey.currentState!.validate();
-                      // conditions for validating
-                      if (currentText.length != 4 || currentText != "1234") {
-                        errorController!.add(ErrorAnimationType
-                            .shake); // Triggering error shake animation
-                        setState(() => hasError = true);
-                      } else {
-                        setState(
-                          () {
-                            hasError = false;
-                            snackBar("OTP Verified!!");
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Home()));
-                          },
-                        );
-                      }
                     },
                     child: Center(
                         child: Text(
-                      "VERIFY".toUpperCase(),
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          letterSpacing: 2,
-                          fontWeight: FontWeight.w700),
-                    )),
+                          "VERIFY".toUpperCase(),
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              letterSpacing: 2,
+                              fontWeight: FontWeight.w700),
+                        )),
                   ),
                 ),
               ],
@@ -261,6 +254,8 @@ class OTPVerificationState extends State<OTPVerification> {
           ),
         ],
       ),
+),
+)
     );
   }
 }

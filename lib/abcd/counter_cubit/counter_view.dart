@@ -1,9 +1,9 @@
 
+import 'package:bloc_examples/abcd/counter_cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconly/iconly.dart';
 
-import 'package:bloc_examples/counter/counter_cubit.dart';
 
 class CounterPage extends StatelessWidget {
   @override
