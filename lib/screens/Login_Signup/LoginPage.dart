@@ -1,11 +1,11 @@
-import 'package:bloc_examples/authentication/authentication_bloc.dart';
-import 'package:bloc_examples/authentication/authentication_event.dart';
-import 'package:bloc_examples/authentication/authentication_state.dart';
 import 'package:bloc_examples/screens/Login_Signup/SignupPage.dart';
 import 'package:bloc_examples/utilities/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import '../../abcd/authentication/authentication_bloc.dart';
+import '../../abcd/authentication/authentication_event.dart';
+import '../../abcd/authentication/authentication_state.dart';
 import 'OTPpage.dart';
 
 
@@ -25,17 +25,7 @@ class LoginPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          Expanded(
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.9,
-              height: MediaQuery.of(context).size.width * 0.7,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          "https://i.pinimg.com/originals/fe/93/b0/fe93b053043276b38386e625295af6cc.gif") //todo
-                      )),
-            ),
-          ),
+          _AuthGifContainer(context),
           BlocBuilder<AuthenticationBloc, AuthenticationState>(
             builder: (context, state) {
               return Container(
@@ -71,9 +61,6 @@ class LoginPage extends StatelessWidget {
                             controller: phoneController,
                             cursorColor: Colors.red[900],
                             keyboardType: TextInputType.phone,
-                            // onFieldSubmitted: (value){
-                            //   phoneNumber = value;
-                            // },
                             onChanged: (value) {
                               bloc.add(AuthenticationErrorEvent(
                                   phoneNumberValue: phoneController.text));
@@ -175,6 +162,21 @@ class LoginPage extends StatelessWidget {
             },
           ),
         ],
+      ),
+    );
+
+
+  }
+  Widget _AuthGifContainer(context){
+    return Expanded(
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.width * 0.7,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(
+                    "https://i.pinimg.com/originals/fe/93/b0/fe93b053043276b38386e625295af6cc.gif") //todo
+            )),
       ),
     );
   }

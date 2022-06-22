@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
-import 'package:bloc_examples/authentication/authentication_bloc.dart';
-import 'package:bloc_examples/authentication/authentication_event.dart';
-import 'package:bloc_examples/authentication/authentication_state.dart';
+import 'package:bloc_examples/abcd/authentication/authentication_bloc.dart';
+import 'package:bloc_examples/abcd/authentication/authentication_event.dart';
+import 'package:bloc_examples/abcd/authentication/authentication_state.dart';
 import 'package:bloc_examples/screens/Home.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
