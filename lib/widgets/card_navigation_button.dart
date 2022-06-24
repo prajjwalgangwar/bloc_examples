@@ -24,7 +24,7 @@ class CardNavigationButton extends StatelessWidget{
         ),
         child: Text(
           name,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w500,
             letterSpacing: 2
