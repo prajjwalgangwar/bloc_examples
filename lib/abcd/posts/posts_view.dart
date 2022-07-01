@@ -44,10 +44,10 @@ class _PostListState extends State<PostList> {
     return BlocBuilder<PostsBloc, PostsState>(builder: (context, state) {
       switch (state.status) {
         //-----------------       PostStatus.failure       -----------------
-        case PostStatus.failure:
-          return const Center(child: Text('Error in fetching posts'));
+          case PostStatus.failure:
+            return const Center(child: Text('Error in fetching posts'));
 
-        //-----------------       PostStatus.success       -----------------
+          //-----------------       PostStatus.success       -----------------
         case PostStatus.success:
 
           return state.posts.isNotEmpty

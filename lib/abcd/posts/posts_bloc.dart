@@ -10,7 +10,6 @@ import 'posts_event.dart';
 import 'posts_state.dart';
 
 class PostsBloc extends Bloc<PostsEvent, PostsState> {
-
   PostsBloc({required this.httpClient}) : super(const PostsState()) {
     on<PostFetched>(_onPostFetched,
         transformer: throttleDroppable(throttleDuration));
@@ -26,7 +25,8 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
     };
   }
 
-  Future<void> _onPostFetched(PostFetched event, Emitter<PostsState> emit) async {
+  Future<void> _onPostFetched(
+      PostFetched event, Emitter<PostsState> emit) async {
     if (state.hasReachedMax) return;
     try {
       if (state.status == PostStatus.initial) {
@@ -35,15 +35,14 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
             posts: posts, status: PostStatus.success, hasReachedMax: false));
       }
 
-
       final posts = await _fetchPost(state.posts.length);
 
-      posts.isEmpty ? emit(state.copyWith(hasReachedMax: true))
+      posts.isEmpty
+          ? emit(state.copyWith(hasReachedMax: true))
           : emit(state.copyWith(
               status: PostStatus.success,
               posts: List.of(state.posts)..addAll(posts),
               hasReachedMax: false));
-
     } catch (_) {
       emit(state.copyWith(status: PostStatus.failure));
     }

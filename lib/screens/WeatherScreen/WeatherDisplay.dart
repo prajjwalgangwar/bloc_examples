@@ -65,7 +65,7 @@ class WeatherDisplay extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Weather'),
+                    const Text('WeatherScreen'),
                     Text(
                         'id: ${weatherModel.weather.first.id} \nmain: ${weatherModel.weather.first.main} \ndesc: ${weatherModel.weather.first.description}')
                   ],

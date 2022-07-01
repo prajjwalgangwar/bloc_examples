@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bloc_examples/abcd/weather/weather_bloc.dart';
 import 'package:bloc_examples/abcd/weather/weather_state.dart';
-import 'package:bloc_examples/screens/Weather/WeatherDisplay.dart';
+import 'package:bloc_examples/screens/WeatherScreen/WeatherDisplay.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,11 +36,11 @@ class SplashScreenState extends State<WeatherSearchScreen>
     return BlocListener<WeatherBloc, WeatherState>(
       listener: (context, state) {
         if (state is WeatherLoadedState) {
-          Get.snackbar('Success: ', 'Weather Loaded',
+          Get.snackbar('Success: ', 'WeatherScreen Loaded',
               backgroundColor: Colors.blue.shade300);
         }
         if(state is WeatherErrorState){
-          Get.snackbar('Error: ${state.errorMessage} ', 'Error Loading Weather',
+          Get.snackbar('Error: ${state.errorMessage} ', 'Error Loading WeatherScreen',
               backgroundColor: Colors.red.shade300);
         }
         if(state is WeatherInitialState){
@@ -84,7 +84,7 @@ class SplashScreenState extends State<WeatherSearchScreen>
                     }),
                 AnimatedTextKit(
                   animatedTexts: [
-                    TypewriterAnimatedText('Search For Weather',
+                    TypewriterAnimatedText('Search For WeatherScreen',
                         textStyle: TextStyle(
                             color: Colors.red.shade50,
                             fontSize: 20,

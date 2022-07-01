@@ -1,23 +1,16 @@
-
-import 'dart:convert';
-
-import 'package:bloc_examples/abcd/weather/WeatherRepository.dart';
-import 'package:bloc_examples/models/weather_model.dart';
-import 'package:bloc_examples/screens/CovidTracker/CovidTracker.dart';
-import 'package:bloc_examples/screens/CovidTracker/SplashScreen.dart';
+import 'package:bloc_examples/abcd/sensors/sensors_view.dart';
 import 'package:bloc_examples/screens/Home.dart';
-import 'package:bloc_examples/screens/Weather/WeatherSearchScreen.dart';
+import 'package:bloc_examples/screens/SensorsScreen/SensorsView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
-import 'package:http/http.dart' as http;
 
 
 void main() async {
-  await WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   // debugRepaintRainbowEnabled = true;
   BlocOverrides.runZoned(
-        () => runApp(MyApp()),
+        () => runApp(const MyApp()),
     blocObserver: SimpleBlocObserver(),
   );
 }
@@ -29,11 +22,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'MyBLOCs',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Home()
+      home: SensorsPage()
     );
   }
 }
