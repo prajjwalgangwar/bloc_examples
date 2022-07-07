@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:bloc_examples/abcd/posts/posts_state.dart';
 import 'package:bloc_examples/utilities/app_constants.dart';
 import 'package:flutter_sensors/flutter_sensors.dart';
 
@@ -10,9 +9,6 @@ class SensorsBloc extends Bloc<XSensorsEvent, SensorsState> {
   SensorsBloc() : super(const SensorsState()){
     on<AvailableSensorsEvent>(availableSensorsInPhone);
   }
-
-
-
   void availableSensorsInPhone(AvailableSensorsEvent event, Emitter<SensorsState> emit)async {
     try{
       for(int i = 0; i < AppConstants.globalSensorsList.length; i++){
@@ -32,6 +28,4 @@ class SensorsBloc extends Bloc<XSensorsEvent, SensorsState> {
       throw Exception(e);
     }
   }
-
-
 }
